@@ -251,7 +251,8 @@ const styles = StyleSheet.create({
     justifyContent: "center" 
   },
   messageText: {
-    fontSize: 16 
+    fontSize: 16,
+    textAlign: "center"
   }
 });
 

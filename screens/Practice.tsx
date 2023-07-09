@@ -96,13 +96,23 @@ const Practice = ({ navigation, route }: PracticeProps) => {
     setTimeout(() => changeCards(wasCorrect), 400);
   };
 
-  const revealAns = () => {
-    Animated.timing(answerOpacity, {
-      toValue: 1,
-      duration: 75,
-      useNativeDriver: true,
-    }).start();
-  };
+  const [rev, setRev] = useState(false)
+
+  useEffect(() => {
+    if (rev) {
+      Animated.timing(answerOpacity, {
+        toValue: 1,
+        duration: 75,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.timing(answerOpacity, {
+        toValue: 0,
+        duration: 75,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [rev]);
 
   return (
     <View style={styles().container}>
@@ -130,12 +140,12 @@ const Practice = ({ navigation, route }: PracticeProps) => {
       </Animated.View>
 
       <Button
-        text={"Reveal the Answer"}
+        text={rev ? "Hide the Answer" : "Reveal the Answer"}
         backGround="#E2ECEF"
         radius={10}
         yPadding={14}
         xPadding={24}
-        function={revealAns}
+        function={() => setRev(!rev)}
       />
 
       <View style={styles().controls}>

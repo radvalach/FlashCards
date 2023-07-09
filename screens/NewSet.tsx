@@ -202,7 +202,6 @@ const NewSet = ({ navigation }: NewSetProps) => {
     }
   };
 
-
   return (
     <KeyboardAvoidingView
       keyboardVerticalOffset={70}
@@ -214,7 +213,7 @@ const NewSet = ({ navigation }: NewSetProps) => {
       contentContainerStyle={styles().contentContainer}
       contentInsetAdjustmentBehavior="automatic"
       scrollEventThrottle={16}
-      keyboardShouldPersistTaps="always"
+
       onScroll={Animated.event(
         [{ nativeEvent: { contentOffset: { y: floatingPosition } } }],
         { useNativeDriver: true }

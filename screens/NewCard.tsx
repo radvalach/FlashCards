@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, TextInput, View } from "react-native";
 
 import { card, cardSet, RootStackParamList } from "../App";
 import ModalHeader from "../components/Home/ModalHeader";
@@ -106,7 +106,11 @@ const NewCard = ({ navigation, route }: NewCardProps) => {
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView 
+      style={styles.container}
+      keyboardVerticalOffset={70}
+      behavior={"padding"}
+      >
       <ModalHeader
         isNew={isNew}
         canSave={canSave}
@@ -128,17 +132,18 @@ const NewCard = ({ navigation, route }: NewCardProps) => {
           multiline={true}
         />
       </View>
-
-      <TextInput
-        value={cardAnswer}
-        onChangeText={(newCardAnswer) => setCardAnswer(newCardAnswer)}
-        placeholder={"Term description..."}
-        style={styles.answerInput}
-        placeholderTextColor={"#8F8F91"}
-        maxLength={1024}
-        multiline={true}
-      />
-    </View>
+      <View style={styles.answerContainer}>
+        <TextInput
+          value={cardAnswer}
+          onChangeText={(newCardAnswer) => setCardAnswer(newCardAnswer)}
+          placeholder={"Term description..."}
+          style={styles.answerInput}
+          placeholderTextColor={"#8F8F91"}
+          maxLength={512}
+          multiline={true}
+        />
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -163,14 +168,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     flex: 1,
   },
-  answerInput: {
+  answerContainer: {
+    height: 300,
     backgroundColor: "#F6F7F9",
     borderRadius: 10,
-    width: "100%",
-    flex: 1,
-    paddingHorizontal: 12,
-    paddingTop: 10,
+    flexDirection: "row",
+    marginBottom: 20,
+    paddingVertical: 8,
+  },
+  answerInput: {
     fontSize: 16,
+    paddingHorizontal: 12,
+    flex: 1,
   },
 });
 
