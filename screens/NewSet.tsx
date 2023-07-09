@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Animated, Dimensions, FlatList, KeyboardAvoidingView, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Animated, Dimensions, FlatList, KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
@@ -204,11 +204,17 @@ const NewSet = ({ navigation }: NewSetProps) => {
 
 
   return (
-    <AnimScroll
+    <KeyboardAvoidingView
+      keyboardVerticalOffset={70}
+      behavior={"padding"}
+      style={{flex: 1, backgroundColor: "white"}}
+    >
+    <Animated.ScrollView
       style={styles().container}
       contentContainerStyle={styles().contentContainer}
       contentInsetAdjustmentBehavior="automatic"
       scrollEventThrottle={16}
+      keyboardShouldPersistTaps="always"
       onScroll={Animated.event(
         [{ nativeEvent: { contentOffset: { y: floatingPosition } } }],
         { useNativeDriver: true }
@@ -241,7 +247,6 @@ const NewSet = ({ navigation }: NewSetProps) => {
         placeholderTextColor={"#8F8F91"}
         maxLength={32}
         textAlign="center"
-
       />
 
       <Text style={styles().sectionHeader}>Save to an existing folder</Text>
@@ -318,7 +323,8 @@ const NewSet = ({ navigation }: NewSetProps) => {
           scrollEnabled={false}
         />
       </View>
-    </AnimScroll>
+    </Animated.ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
