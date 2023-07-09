@@ -7,3 +7,6 @@
 
 ## Practicing a Card Set
 <img src="https://github.com/radvalach/FlashCards/blob/main/RPReplay_Final1688936170-2.gif" width="400">
+
+## Design Project Document
+![](https://github.com/radvalach/FlashCards/blob/main/Design%20Project.pdf)
