@@ -113,13 +113,14 @@ const NewCard = ({ navigation, route }: NewCardProps) => {
         func={saveCard}
         nav={() => navigation.goBack()}
         showLeft={true}
+        title="New Card"
       />
 
       <View style={styles.inputContainer}>
         <TextInput
           value={cardTitle}
           onChangeText={(newCardName) => setCardTitle(newCardName)}
-          placeholder={"Set Title"}
+          placeholder={"Card Title"}
           style={styles.titleInput}
           placeholderTextColor={"#8F8F91"}
           maxLength={64}

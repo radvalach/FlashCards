@@ -1,8 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Animated, Dimensions, FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Animated, Dimensions, FlatList, KeyboardAvoidingView, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { cardSet, folder, RootStackParamList } from "../App";
 import Button from "../components/Global/Button";
@@ -32,6 +33,8 @@ const NewSet = ({ navigation }: NewSetProps) => {
     outputRange: [0, 1],
     extrapolate: "extend",
   });
+
+  const AnimScroll = Animated.createAnimatedComponent(KeyboardAwareScrollView)
 
   useEffect(() => {
     if (
@@ -199,8 +202,9 @@ const NewSet = ({ navigation }: NewSetProps) => {
     }
   };
 
+
   return (
-    <Animated.ScrollView
+    <AnimScroll
       style={styles().container}
       contentContainerStyle={styles().contentContainer}
       contentInsetAdjustmentBehavior="automatic"
@@ -226,6 +230,7 @@ const NewSet = ({ navigation }: NewSetProps) => {
         func={savefolders}
         nav={() => navigation.goBack()}
         showLeft={true}
+        title="New Set"
       />
 
       <TextInput
@@ -236,6 +241,7 @@ const NewSet = ({ navigation }: NewSetProps) => {
         placeholderTextColor={"#8F8F91"}
         maxLength={32}
         textAlign="center"
+
       />
 
       <Text style={styles().sectionHeader}>Save to an existing folder</Text>
@@ -312,7 +318,7 @@ const NewSet = ({ navigation }: NewSetProps) => {
           scrollEnabled={false}
         />
       </View>
-    </Animated.ScrollView>
+    </AnimScroll>
   );
 };
 

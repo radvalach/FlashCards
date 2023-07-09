@@ -9,8 +9,9 @@ type ModalHeaderProps = {
   func: () => void;
   nav: () => void;
   showLeft: boolean;
+  title: string;
 }
-const ModalHeader = ({ isNew, canSave, func, nav, showLeft }: ModalHeaderProps) => {
+const ModalHeader = ({ isNew, canSave, func, nav, showLeft, title }: ModalHeaderProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.leftButton}>
@@ -25,7 +26,7 @@ const ModalHeader = ({ isNew, canSave, func, nav, showLeft }: ModalHeaderProps) 
           />
         )}
       </View>
-      <Text style={styles.headerTitle}>New Set</Text>
+      <Text style={styles.headerTitle}>{title}</Text>
 
       <View style={styles.rightButton}>
         <Button

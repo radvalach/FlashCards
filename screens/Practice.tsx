@@ -48,6 +48,12 @@ const Practice = ({ navigation, route }: PracticeProps) => {
     change();
   }, [learnedCards]);
 
+  useEffect(() => {
+    if (remainingCards.length == 0) {
+      navigation.goBack()
+    }
+  }, [learnedCards])
+
   const changeCards = (wasCorrect: boolean) => {
     let copy = [...remainingCards];
     let popped = copy.pop();
@@ -61,10 +67,6 @@ const Practice = ({ navigation, route }: PracticeProps) => {
     } else {
       setremainingCards([popped, ...copy]);
       setWrongCardsN(wrongCardsN + 1);
-    }
-
-    if (copy.length == 0) {
-      navigation.goBack()
     }
   };
 
@@ -111,18 +113,19 @@ const Practice = ({ navigation, route }: PracticeProps) => {
           func={() => navigation.goBack()}
           showLeft={false}
           nav={() => navigation.goBack()}
+          title="New Set"
         />
       </View>
 
       <Animated.View style={styles(scaled).cardTitle}>
         <Text style={styles().cardTitleText}>
-          {remainingCards.slice(-1)[0].title}
+          {(remainingCards.length > 0) ? remainingCards.slice(-1)[0].title : ""}
         </Text>
       </Animated.View>
 
       <Animated.View style={styles().cardAnswer}>
         <Animated.Text style={styles(undefined, answerOpacity).cardAnswerText}>
-          {remainingCards.slice(-1)[0].answer}
+          {(remainingCards.length > 0) ? remainingCards.slice(-1)[0].answer : ""}
         </Animated.Text>
       </Animated.View>
 
